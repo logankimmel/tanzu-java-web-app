@@ -3,6 +3,9 @@ kind: Component
 metadata:
   name: tanzu-java-web-app
   description: Tanzu Java Web App
+  links:
+    - url: https://tanzu-java-web-app.default.vmw.binbytes.io
+      title: homepage
   tags:
     - app-accelerator
     - java
@@ -15,4 +18,4 @@ spec:
   type: service
   lifecycle: experimental
   owner: default-team
-  system: tanzu-java-web-app
+  system: demo-env

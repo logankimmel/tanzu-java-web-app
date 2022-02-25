@@ -3,14 +3,15 @@ LOCAL_PATH = os.getenv("LOCAL_PATH", default='.')
 NAMESPACE = os.getenv("NAMESPACE", default='default')
 
 k8s_custom_deploy(
-    'tanzu-java-web-app',
-    apply_cmd="tanzu apps workload apply -f config/workload.yaml --live-update" +
+    'tanzu-java-web-app-dev',
+    apply_cmd="tanzu apps workload create tanzu-java-web-app-dev --live-update" +
                " --local-path " + LOCAL_PATH +
                " --source-image " + SOURCE_IMAGE +
                " --namespace " + NAMESPACE +
+               " --type web" +
                " --yes >/dev/null" +
-               " && kubectl get workload tanzu-java-web-app --namespace " + NAMESPACE + " -o yaml",
-    delete_cmd="tanzu apps workload delete -f config/workload.yaml --namespace " + NAMESPACE + " --yes",
+               " && kubectl get workload tanzu-java-web-app-dev --namespace " + NAMESPACE + " -o yaml",
+    delete_cmd="tanzu apps workload delete tanzu-java-web-app-dev --namespace " + NAMESPACE + " --yes",
     deps=['pom.xml', './target/classes'],
     container_selector='workload',
     live_update=[
@@ -18,6 +19,6 @@ k8s_custom_deploy(
     ]
 )
 
-k8s_resource('tanzu-java-web-app', port_forwards=["8080:8080"],
-            extra_pod_selectors=[{'serving.knative.dev/service': 'tanzu-java-web-app'}])
+k8s_resource('tanzu-java-web-app-dev', port_forwards=["8080:8080"],
+            extra_pod_selectors=[{'serving.knative.dev/service': 'tanzu-java-web-app-dev'}])
 allow_k8s_contexts('lkimmel')

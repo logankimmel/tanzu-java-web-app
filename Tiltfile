@@ -4,7 +4,7 @@ NAMESPACE = os.getenv("NAMESPACE", default='default')
 
 k8s_custom_deploy(
     'tanzu-java-web-app-dev',
-    apply_cmd="tanzu apps workload create tanzu-java-web-app-dev --live-update" +
+    apply_cmd="tanzu apps workload apply tanzu-java-web-app-dev --live-update" +
                " --local-path " + LOCAL_PATH +
                " --source-image " + SOURCE_IMAGE +
                " --namespace " + NAMESPACE +
@@ -19,6 +19,6 @@ k8s_custom_deploy(
     ]
 )
 
-k8s_resource('tanzu-java-web-app-dev', port_forwards=["8080:8080"],
+k8s_resource('tanzu-java-web-app-dev', port_forwards=["8081:8080"],
             extra_pod_selectors=[{'serving.knative.dev/service': 'tanzu-java-web-app-dev'}])
 allow_k8s_contexts('lkimmel')

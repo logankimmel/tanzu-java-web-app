@@ -7,8 +7,13 @@ metadata:
     apps.tanzu.vmware.com/workload-type: xxxx
     app.kubernetes.io/part-of: xxxx
 spec:
+  params:
+  - name: annotations
+    value:
+      autoscaling.knative.dev/minScale: "1"
   source:
     git:
       url: xxxx
       ref:
         branch: xxxx
+

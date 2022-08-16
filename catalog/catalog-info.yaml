@@ -4,7 +4,7 @@ metadata:
   name: tanzu-java-web-app
   description: Tanzu Java Web App
   links:
-    - url: https://tanzu-java-web-app.default.vmw.binbytes.io
+    - url: https://tanzu-java-web-app.default.k8s.binbytes.io
       title: homepage
   tags:
     - app-accelerator

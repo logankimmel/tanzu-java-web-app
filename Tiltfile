@@ -21,4 +21,4 @@ k8s_custom_deploy(
 
 k8s_resource('tanzu-java-web-app-dev', port_forwards=["8081:8080"],
             extra_pod_selectors=[{'serving.knative.dev/service': 'tanzu-java-web-app-dev'}])
-allow_k8s_contexts('lkimmel-tap-admin@lkimmel-tap')
+allow_k8s_contexts('sample-kube-context')

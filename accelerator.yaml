@@ -1,7 +1,7 @@
 accelerator:
-  displayName: Tanzu Java Web App
+  displayName: Logans Java Web App
   description: A sample Spring Boot web application built with Tanzu supply-chain
-  iconUrl: https://github.com/sample-accelerators/icons/raw/master/icon-boot.png
+  iconUrl: https://www.pngfind.com/pngs/m/682-6827427_transparent-thumb-up-emoji-png-thumbs-up-apple.png
   tags:
   - java
   - spring
@@ -13,6 +13,11 @@ accelerator:
     inputType: text
     label: Prefix for the container image repository
     defaultValue: dev.local
+    required: true
+  - name: kubeContext
+    inputType: text
+    label: Kube context for testing
+    defaultValue: local
     required: true
 
 engine:
@@ -29,6 +34,10 @@ engine:
       substitutions:
       - text: your-registry.io/project
         with: "#repositoryPrefix"
+    - type: ReplaceText
+      substitutions:
+      - text: sample-kube-context
+        with: "#kubeContext"
   - include: [ "README.md" ]
     chain:
     - type: ReplaceText

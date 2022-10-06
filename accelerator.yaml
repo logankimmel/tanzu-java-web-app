@@ -21,7 +21,6 @@ accelerator:
     required: true
 
 engine:
-  onConflict: NWayDiff
   merge:
   - include: [ "**/*" ]
     exclude: [ "config/*.yaml", "Tiltfile", "README.md", "grype.yaml", "catalog/*.yaml", ".github/workflows/**" ]

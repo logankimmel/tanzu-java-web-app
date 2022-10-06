@@ -1,6 +1,7 @@
 SOURCE_IMAGE = os.getenv("SOURCE_IMAGE", default='your-registry.io/project/tanzu-java-web-app-source')
 LOCAL_PATH = os.getenv("LOCAL_PATH", default='.')
 NAMESPACE = os.getenv("NAMESPACE", default='default')
+OUTPUT_TO_NULL_COMMAND = os.getenv("OUTPUT_TO_NULL_COMMAND", default=' > /dev/null ')
 
 k8s_custom_deploy(
     'tanzu-java-web-app-dev',
@@ -9,7 +10,8 @@ k8s_custom_deploy(
                " --source-image " + SOURCE_IMAGE +
                " --namespace " + NAMESPACE +
                " --type web" +
-               " --yes >/dev/null" +
+               " --yes " +
+	       OUTPUT_TO_NULL_COMMAND +
                " && kubectl get workload tanzu-java-web-app-dev --namespace " + NAMESPACE + " -o yaml",
     delete_cmd="tanzu apps workload delete tanzu-java-web-app-dev --namespace " + NAMESPACE + " --yes",
     deps=['pom.xml', './target/classes'],

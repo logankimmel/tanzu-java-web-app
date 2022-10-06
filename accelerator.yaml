@@ -1,7 +1,7 @@
 accelerator:
   displayName: Logans Java Web App
   description: A sample Spring Boot web application built with Tanzu supply-chain
-  iconUrl: https://www.pngfind.com/pngs/m/682-6827427_transparent-thumb-up-emoji-png-thumbs-up-apple.png
+  iconUrl: https://github.com/sample-accelerators/icons/raw/master/icon-boot.png
   tags:
   - java
   - spring
@@ -21,15 +21,16 @@ accelerator:
     required: true
 
 engine:
+  onConflict: NWayDiff
   merge:
   - include: [ "**/*" ]
-    exclude: [ "config/*.yaml", "Tiltfile", "README.md", "catalog/*.yaml", ".github/workflows/**" ]
-  - include: [ "config/*.yaml", "Tiltfile" ]
+    exclude: [ "config/*.yaml", "Tiltfile", "README.md", "grype.yaml", "catalog/*.yaml", ".github/workflows/**" ]
+  - include: [ "Tiltfile" ]
     chain:
     - type: ReplaceText
       substitutions:
       - text: tanzu-java-web-app
-        with: "#artifactId"
+        with: "#artifactId.toLowerCase()"
     - type: ReplaceText
       substitutions:
       - text: your-registry.io/project
@@ -52,3 +53,7 @@ engine:
         with: "#artifactId"
     - type: RewritePath
       rewriteTo: "#filename"
+  - include: [ "config/workload.yaml"]
+    chain:
+    - type: InvokeFragment
+      reference: tap-workload

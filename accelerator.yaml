@@ -52,7 +52,3 @@ engine:
         with: "#artifactId"
     - type: RewritePath
       rewriteTo: "#filename"
-  - include: [ "config/workload.yaml"]
-    chain:
-    - type: InvokeFragment
-      reference: tap-workload
